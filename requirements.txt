@@ -1,1 +1,9 @@
 langchain-community
+langchain_text_splitters
+pypdf
+ipykernel
+sentence-transformers
+scikit-learn
+openai 
+python-dotenv
+groq
