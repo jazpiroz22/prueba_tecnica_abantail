@@ -7,3 +7,5 @@ scikit-learn
 openai 
 python-dotenv
 groq
+rank-bm25
+nltk

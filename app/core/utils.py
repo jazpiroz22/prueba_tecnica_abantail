@@ -1,6 +1,8 @@
+import re
 from pypdf import PdfReader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from sentence_transformers import SentenceTransformer
+
 
 # Cargar .txt
 def load_text(path: str) -> str:
@@ -13,9 +15,17 @@ def load_pdf(path: str) -> str:
     text = ""
 
     for page in reader.pages:
-        text += page.extract_text()
+        text += page.extract_text() + "\n"
+
+    # Limpiar texto
+    text = re.sub(r"\s+\n\s+", "\n", text)
+    text = re.sub(r"\n+", "\n", text)
 
     return text
+
+def tokenize(text):
+    return text.lower().split()
+
 
 #Función chunk
 def split_text(text: str,size=250,overlap=50,function=len) -> list[str]:

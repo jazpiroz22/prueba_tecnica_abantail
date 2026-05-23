@@ -6,23 +6,15 @@ from app.core.embedding_service import generate_embedding
 from app.core.llm_service_groq import ask_llm
 from sklearn.metrics.pairwise import cosine_similarity
 
+from app.core.utils import split_text, load_pdf
 
 def load_text(path: str) -> str:
     with open(path, "r", encoding="utf-8") as f:
         return f.read()
 
-def load_pdf(path: str) -> str:
-    reader = PdfReader(path)
-
-    text = ""
-
-    for page in reader.pages:
-        text += page.extract_text()
-
-    return text
-
 
 # %%
+
 
 text = load_text("./data/test.txt")
 print(text)
@@ -32,7 +24,7 @@ chunks = split_text(pdf)
 
 print(f"Total chunks: {len(chunks)}")
 
-for i, chunk in enumerate(chunks[:3]):
+for i, chunk in enumerate(chunks[:5]):
     print(f"\n--- Chunk {i} ---\n")
     print(chunk)
     

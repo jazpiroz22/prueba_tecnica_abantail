@@ -16,7 +16,7 @@ Pregunta usuario
 ↓
 Embedding pregunta
 ↓
-Similarity search
+Similarity search (cosine similarity)
 ↓
 Top chunks
 ↓
@@ -47,7 +47,20 @@ curl -fsSL https://ollama.com/install.sh | sh
 
 ### Teoria
 ```
-¿Qué es chunk_overlap?
+chunks
+
+Fragmentos de texto o de documente (como un array de arrays de texto) 
+
+chunk_overlap
 
 Es la cantidad de texto que se repite entre chunks consecutivos, como asegurar que ninguna idea importante se parte por la mitad.
+
+Embeddings
+
+Representación vectorial de los chunks
+
+Retrieving
+
+Busqueda de los K chunks más relevantes, acaba siendo el input del LLM 
 ```
+
