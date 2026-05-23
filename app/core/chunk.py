@@ -1,8 +1,4 @@
-#from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-
-import sys
-print(sys.executable)
 
 
 def split_text(text: str) -> list[str]:
