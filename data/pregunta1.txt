@@ -1,1 +1,5 @@
 "¿Qué redes neuronales convolucionales conoces?"
+
+"¿Qué arquitecturas CNN se mencionan en el documento?"
+
+"¿Qué modelos de redes neuronales se analizaron?"

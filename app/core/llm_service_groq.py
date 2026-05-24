@@ -12,17 +12,23 @@ client = Groq(
 def ask_llm(context: str, question: str):
 
     prompt = f"""
-You are a question answering system.
+Eres un asistente RAG.
 
-Rules:
-- Use ONLY the context below.
-- If answer is not in context, say: "I don't have enough information."
+Responde SOLO usando el contexto proporcionado.
 
-Context:
+Si no está en el contexto, di "No hay información suficiente".
+
+Siempre incluye la fuente en tu respuesta usando este formato:
+
+- [SOURCE: nombre_del_documento]
+
+CONTEXTO:
 {context}
 
-Question:
+PREGUNTA:
 {question}
+
+RESPUESTA:
 """
 
     response = client.chat.completions.create(

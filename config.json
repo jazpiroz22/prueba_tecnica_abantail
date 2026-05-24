@@ -1,5 +1,5 @@
 {
-    "pdf_path": "./data/PFG_Julen_Azpiroz.pdf",
+    "data_dir": "./data/docs",
     "top_k": 30,
     "chunk_size": 500,
     "chunk_overlap": 50
