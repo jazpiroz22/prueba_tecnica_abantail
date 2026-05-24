@@ -24,7 +24,8 @@ def load_pdf(path: str) -> str:
     return text
 
 def tokenize(text):
-    return text.lower().split()
+    return re.findall(r"\w+", text.lower()) # Mejora para BM25
+    #return text.lower().split()
 
 
 #Función chunk
