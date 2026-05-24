@@ -37,7 +37,22 @@ Generación de respuesta con LLM
 ↓
 Respuesta final con fuentes
 ```
-## Como activarlo usando docker
+
+## Ejecución con Docker
+
+### 1. Construir imagen
+
+```bash
+docker build -t rag-chat .
+```
+### 2. Ejecutar contenedor
+```bash
+docker run -it rag-chat
+```
+### (Opcional) con variables de entorno
+```bash
+docker run -it --env-file .env rag-chat
+```
 
 ## Ejecutar código nativo (Python + entorno virtual)
 
@@ -73,7 +88,7 @@ pip install -r requirements.txt
 Para iniciar el sistema RAG en modo chat:
 
 ```bash
-python3 chat.py config.json
+python3 -m app.main config.json
 ```
 
 El archivo `config.json` es OPCIONAL, se puede ejecutar el código con una serie de parametros por defecto, pero si el usuario desea cambiar ciertos parametros puede hacerlo modificando los valores de `config.json`
