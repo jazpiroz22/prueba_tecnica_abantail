@@ -99,31 +99,41 @@ Los parametros son los siguientes:
 - top_k: Número de chunks más relevantes recuperados durante el retrieval y enviados al LLM.
 - chunk_size: Tamaño máximo (en caracteres) de cada chunk generado durante el proceso de segmentación.
 - chunk_overlap: El número de caracteres del chunk_overlap (Es la cantidad de texto que se repite entre chunks consecutivos, como asegurar que ninguna idea importante se parte por la mitad.)
+- llm_mode: Especificar si se pretende utilizar un LLM local, o un LLM online, los valores son:  `online` o `local`. Para utilizar adecuadamente cada uno de ellos, seguid las instrucciones detalladas en este fichero `readme.md`
+- online_model: Nombre del modelo online a utilizar, por defecto esta etablecido: `llama-3.1-8b-instant`, se recomienda no cambiar este parámetro.
+- local_model: Nombre del modelo local a utilizar, por defecto esta etablecido: `llama3.1:8b`.
+
+### Obtener la API key
+
+Lo único que habrá que hacer para poder utilizar el modelo Groq de forma online, es obtener una API key, y escribirla en el fichero `.env`.
+Primero hay que dirigirse a la página: https://console.groq.com/home, loggearse (se puede hacer con email personal), una vez logeado, clickar en donde pone `API KEYS` arriba a la derecha, clicar en `Create API Key`, insertar un nombre cualquiera, avanzar, y el contenido que se genera copiarlo y pegar en el fichero `.env` donde poner `GROQ_API_KEY`.
+
+Por último, asegurarse de que el parametro del `config.json` "llm_mode" esté marcado con "online".
 
 
-### Instalar modelo Ollama3.1:8b
+## Uso con modelos locales (Ollama)
+
+Para ejecutar el RAG a traves de un LLM local, primero se habrá de instalar la librería ollama:
+
+```bash
+sudo snap install ollama
 ```
-curl -fsSL https://ollama.com/install.sh | sh
+
+Despues, habrá que descargar el modelo, este proceso descarga un modelo de 4.9Gb de peso. Se recomienda usar conexión ethernet si se procede con este procedimiento.
+
+```bash
+ollama pull llama3.1:8b
 ```
 
+Asegurarse de que está correctamente descargado:
+```bash
+ollama list
+```
 
-## Anotaciones de teoria
+Debería aparecer algo así como:
+```
+NAME           ID              SIZE      MODIFIED
+llama3.1:8b    46e0c10c039e    4.9 GB    18 minutes ago
+```
 
-### chunks
-
-Fragmentos de texto o de documente (como un array de arrays de texto) 
-
-### chunk_overlap
-
-Es la cantidad de texto que se repite entre chunks consecutivos, como asegurar que ninguna idea importante se parte por la mitad.
-
-### Embeddings
-
-Representación vectorial de los chunks
-
-### Retrieving
-
-Busqueda de los K chunks más relevantes, acaba siendo el input del LLM 
-
-### BM25
-
+Por último, asegurarse de que el parametro del `config.json` "llm_mode" esté marcado con "local". Este modelo tardá algo más de tiempo con respecto al modelo online.

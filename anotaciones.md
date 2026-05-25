@@ -1,3 +1,5 @@
+#
+
 ```
 --------------------------------------------------
 
@@ -19,3 +21,26 @@ Ejecutando chat con parámetros específicos:
 
 --------------------------------------------------
 ```
+
+#
+## Anotaciones de teoria
+
+### chunks
+
+Fragmentos de texto o de documente (como un array de arrays de texto) 
+
+### chunk_overlap
+
+Es la cantidad de texto que se repite entre chunks consecutivos, como asegurar que ninguna idea importante se parte por la mitad.
+
+### Embeddings
+
+Representación vectorial de los chunks
+
+### Retrieving
+
+Busqueda de los K chunks más relevantes, acaba siendo el input del LLM 
+
+### BM25
+
+Búsqueda léxica basada en frecuencia de términos. Más preciso para terminos como nobmres, titulos, etc.

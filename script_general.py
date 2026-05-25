@@ -3,7 +3,7 @@
 from pypdf import PdfReader
 from app.core.chunk import split_text
 from app.core.embedding_service import generate_embedding
-from app.core.llm_service_groq import ask_llm
+from app.llm.llm_service_groq import ask_llm
 from sklearn.metrics.pairwise import cosine_similarity
 
 from app.core.utils import split_text, load_pdf

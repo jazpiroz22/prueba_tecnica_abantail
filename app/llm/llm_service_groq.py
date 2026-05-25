@@ -9,7 +9,7 @@ client = Groq(
 )
 
 
-def ask_llm(context: str, question: str):
+def ask_llm_groq(context: str, question: str,name: str):
 
     prompt = f"""
 Eres un asistente RAG.
@@ -32,7 +32,7 @@ RESPUESTA:
 """
 
     response = client.chat.completions.create(
-        model="llama-3.1-8b-instant",
+        model=name,
         messages=[
             {"role": "user", "content": prompt}
         ],

@@ -4,7 +4,7 @@ from pathlib import Path
 
 from app.core.utils import split_text, generate_embedding, load_pdf, tokenize, load_text
 from sklearn.metrics.pairwise import cosine_similarity
-from app.core.llm_service_groq import ask_llm
+from app.llm.llm_general import get_llm
 
 from rank_bm25 import BM25Okapi
 import nltk
@@ -140,7 +140,8 @@ def chat_loop(chunks, embeddings, bm25, sources, top_k):
             for r in top_indices
         ])
 
-        answer = ask_llm(context, question)
+        ask_llm = get_llm(llm_mode)
+        answer = ask_llm(context, question, llm_model_name)
 
         print("\n🤖 Bot:\n", answer)
 
@@ -156,8 +157,11 @@ if __name__ == "__main__":
             print("")
             print("Ejecutando chat con parámetros por defecto: ")
             #chunks, embeddings = build_index("./data/PFG_Julen_Azpiroz.pdf",250, 50)
-            chunks, embeddings = build_index("./data/docs/",250, 50)
-            chat_loop(chunks, embeddings, 5)
+            chunks, embeddings, sources = build_index("./data/docs/",500, 50)
+            bm25, tokenized_chunks = build_bm25_index(chunks)
+            llm_mode = "online"
+            llm_model_name = "llama-3.1-8b-instant"
+            chat_loop(chunks, embeddings, bm25, sources, 10)
     else: 
 
         print("")
@@ -176,5 +180,10 @@ if __name__ == "__main__":
         bm25, tokenized_chunks = build_bm25_index(chunks)
 
         top_k_indices = config["top_k"]
+        llm_mode = config["llm_mode"]
+        if llm_mode=="online":
+            llm_model_name = config["online_model"]
+        else:
+            llm_model_name = config["local_model"]
 
         chat_loop(chunks, embeddings, bm25, sources, top_k_indices)
