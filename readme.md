@@ -2,7 +2,7 @@
 
 Este repositorio implementa un sistema de **Retrieval-Augmented Generation (RAG)** capaz de procesar documentos en formato `.pdf`, `.md` y `.txt`, y responder preguntas en lenguaje natural basándose exclusivamente en la información contenida en dichos documentos.
 
-El sistema convierte los documentos en conocimiento consultable mediante técnicas de *chunking*, *embeddings* y *BM25*, y utiliza un modelo de lenguaje (LLM) para generar respuestas contextualizadas.
+El sistema convierte los documentos en conocimiento consultable mediante técnicas de *chunking*, *embeddings*, *BM25* y *retrievals*; utiliza un modelo de lenguaje (LLM) para generar respuestas contextualizadas.
 
 ---
 
@@ -45,11 +45,10 @@ Respuesta final con fuentes
 ```bash
 docker build -t rag-chat .
 ```
+
+Para poder ejecutar el contendero, primero hay que modificar el arhivo `venv`, como se especifica más abajo, una vez configurado correctamente, ejecutar:
+
 ### 2. Ejecutar contenedor
-```bash
-docker run -it rag-chat
-```
-### (Opcional) con variables de entorno
 ```bash
 docker run -it --env-file .env rag-chat
 ```
@@ -105,9 +104,13 @@ Los parametros son los siguientes:
 
 ### Obtener la API key
 
-Lo único que habrá que hacer para poder utilizar el modelo Groq de forma online, es obtener una API key, y escribirla en el fichero `.env`.
-Primero hay que dirigirse a la página: https://console.groq.com/home, loggearse (se puede hacer con email personal), una vez logeado, clickar en donde pone `API KEYS` arriba a la derecha, clicar en `Create API Key`, insertar un nombre cualquiera, avanzar, y el contenido que se genera copiarlo y pegar en el fichero `.env` donde poner `GROQ_API_KEY`.
+Lo único que habrá que hacer para poder utilizar el modelo Groq de forma online, es obtener una API key, y escribirla en el fichero `.env_example`.
+Primero hay que dirigirse a la página: https://console.groq.com/home, loggearse (se puede hacer con email personal), una vez logeado, clickar en donde pone `API KEYS` arriba a la derecha, clicar en `Create API Key`, insertar un nombre cualquiera, avanzar, y el contenido que se genera copiarlo y pegar en el fichero `.env_example` donde poner `GROQ_API_KEY`.
 
+Despues creamos el archivo `.env` como copia de `.env_example` o, renombramos `.env_example` a `.env`.
+```bash
+cp .env.example .env
+```
 Por último, asegurarse de que el parametro del `config.json` "llm_mode" esté marcado con "online".
 
 
