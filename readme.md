@@ -102,6 +102,8 @@ Los parametros son los siguientes:
 - online_model: Nombre del modelo online a utilizar, por defecto esta etablecido: `llama-3.1-8b-instant`, se recomienda no cambiar este parámetro.
 - local_model: Nombre del modelo local a utilizar, por defecto esta etablecido: `llama3.1:8b`.
 
+## Uso con modelo online
+
 ### Obtener la API key
 
 Lo único que habrá que hacer para poder utilizar el modelo Groq de forma online, es obtener una API key, y escribirla en el fichero `.env_example`.
